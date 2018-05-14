@@ -6,7 +6,7 @@ Ele escuta as redes sociais, ouvindo as declarações de amor e acende uma incri
 
 <p style="float:left">
     <img width="400" height="300" src="animacao.GIF">
-    <img width="400" height="300" src="sharing.GIF">
+    <img width="400" height="300" src="animacao2.GIF">
 </p>
  
 ## Instalação
