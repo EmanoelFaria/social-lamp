@@ -1,27 +1,26 @@
-var twitter   = require('./twitter');
-var five      = require("johnny-five");
-var board     = new five.Board();       
+const twitter   = require('./twitter');
+const five      = require("johnny-five");
+const board     = new five.Board();
+
+const credential = {
+    consumer_key: '', 
+    consumer_secret: '',
+    access_token: '',
+    access_token_secret: ''
+}
 
 board.on("ready", ()=> {
     console.log("[INICIANDO SENTIMENTOS]");
-
-    //só pode iniciar o led depois que o board for iniciado
+    
     var led = new five.Led(13);
+    var twitter = new twitter(credential)
 
-     /*chamo o método comecarStream da classe twitter passando a palavra para ser 
-    capturada e o metodo que será executado sempre que achar um tweet com a palavra amor */
-    twitter.comecarStream('amor', ()=>{
-
-        //liga o led
+    twitter.comecarStream('amor',()=>{
         led.on()
-
-        //desliga o led depois de 1 seg
         setTimeout(()=>{
             led.off();
         },1000);
-        
     })
-
 });
 
 

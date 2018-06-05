@@ -1,37 +1,30 @@
 var twitterClient = require('twit');
 
-var credential = {
-    consumer_key: '', 
-    consumer_secret: '',
-    access_token: '',
-    access_token_secret: ''
-}
-
-var twitter = new twitterClient(credential)
-
 class TwitterClass {
 
-    comecarStream(word, callback){
-        console.log('[PROCURANDO FONTE DE AMOR VERDADEIRO]')
+    constructor(credential){
+        this.twitter = new twitterClient(credential);
+    }
 
-        var stream = twitter.stream('statuses/filter', {
-            'track': word
-        })
-    
-        stream.on('tweet', function(tweet) {
+    comecarStream(word,callback){
+        console.log('[PROCURANDO FONTE DE AMOR VERDADEIRO]')
+        
+        var stream = this.twitter.stream('statuses/filter', {'track': word });
+
+        stream.on('tweet', (tweet)=>{
             console.log(tweet.text);
             callback(tweet)
         })
     
-        stream.once('connected', function() {
+        stream.once('connected', ()=>{
             console.log('[SENTIMENTOS CALIBRADOS]');
         })
-
-        stream.on('disconnect', function(disconnectMessage) {
+    
+        stream.on('disconnect', (disconnectMessage)=>{
             console.log(disconnectMessage);
         })
     }
 
 }
 
-module.exports = new TwitterClass();
+module.exports = TwitterClass;
